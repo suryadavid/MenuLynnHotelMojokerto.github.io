@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Menu - LYNN Hotel Mojokerto</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+<style class="fix-form-ramadhan">
+input, .form-control{max-width:100%;width:100%;box-sizing:border-box;}
+.form-group{overflow:hidden;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LYNN Hotel Mojokerto</h1>
+  <p>Restaurant & In-Room Dining Order</p>
+</header>
+
+<div class="container">
+  <div class="field">
+    <label>Nama Pemesan *</label>
+    <input type="text" id="nama" placeholder="Masukkan nama pemesan">
+  </div>
+
+  <div class="field">
+    <label>Tanggal Pemesanan *</label>
+    <input type="date" id="tanggal">
+  </div>
+
+  <div id="menu"></div>
+</div>
+
+<div class="cart">
+  <div class="cart-content">
+    <div id="total">Total: Rp 0</div>
+    <a href="#" id="waBtn" class="wa-btn">Kirim ke WhatsApp</a>
+  </div>
+</div>
+
+<script src="assets/js/menu.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
+
+
+<!-- Contoh penggunaan gambar menu -->
+<!-- <div class="menu-card">
+     <img src="assets/images_menu/appetizer.jpg">
+     <h3>Nama Menu</h3>
+</div> -->
