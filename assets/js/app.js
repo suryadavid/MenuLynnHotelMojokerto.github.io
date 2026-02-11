@@ -1,45 +1,144 @@
 const menuContainer = document.getElementById('menu');
-let cart = {};
+const filterContainer = document.querySelector('.menu-filter');
 
-function renderMenu() {
+let cart = {};
+let activeFilter = "SEMUA";
+
+/* === BUAT ID AMAN === */
+function makeId(text) {
+  return text.replace(/\s+/g, '-').replace(/[^\w-]/g, '').toLowerCase();
+}
+
+/* === BUAT FILTER OTOMATIS === */
+function renderFilter() {
+
+  filterContainer.innerHTML = '';
+
+  const semuaBtn = document.createElement('button');
+  semuaBtn.textContent = "SEMUA";
+  semuaBtn.classList.add('active');
+  semuaBtn.onclick = () => setFilter("SEMUA");
+  filterContainer.appendChild(semuaBtn);
+
   menuData.forEach(cat => {
+
+    const btn = document.createElement('button');
+    btn.textContent = cat.category;
+
+    btn.onclick = () => setFilter(cat.category);
+
+    filterContainer.appendChild(btn);
+  });
+}
+
+/* === SET FILTER === */
+function setFilter(category) {
+
+  activeFilter = category;
+
+  document.querySelectorAll('.menu-filter button')
+    .forEach(b => b.classList.remove('active'));
+
+  [...document.querySelectorAll('.menu-filter button')]
+    .find(b => b.textContent === category)
+    ?.classList.add('active');
+
+  renderMenu();
+}
+
+/* === RENDER MENU === */
+function renderMenu() {
+
+  menuContainer.innerHTML = '';
+
+  menuData.forEach(cat => {
+
+    if (activeFilter !== "SEMUA" && activeFilter !== cat.category) return;
+
     const div = document.createElement('div');
     div.className = 'category';
-    div.innerHTML = `<h2>${cat.category}</h2>`;
+
+    div.innerHTML = `
+      <h2>${cat.category}</h2>
+      <div class="menu-grid"></div>
+    `;
+
+    const grid = div.querySelector('.menu-grid');
 
     cat.items.forEach(item => {
-      cart[item.name] = 0;
 
-      div.innerHTML += `
-        <div class="menu-item">
-          <div>
-            <div class="menu-name">${item.name}</div>
-            <div class="price">Rp ${item.price.toLocaleString('id-ID')}</div>
-          </div>
-          <div class="qty">
-            <button onclick="updateQty('${item.name}', -1)">-</button>
-            <span id="qty-${item.name}">0</span>
-            <button onclick="updateQty('${item.name}', 1)">+</button>
-          </div>
-        </div>`;
+      const id = makeId(item.name);
+      if (!(id in cart)) cart[id] = 0;
+
+      const card = document.createElement('div');
+      card.className = 'menu-card';
+
+      card.innerHTML = `
+        <span class="menu-label">${cat.category}</span>
+        <img src="${item.image || 'assets/images_menu/default.jpg'}">
+
+        <div class="menu-info">
+          <b>${item.name}</b>
+          <span>Rp ${item.price.toLocaleString('id-ID')}</span>
+        </div>
+
+        <div id="control-${id}">
+          ${
+            cart[id] === 0
+            ? `<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`
+            : `
+            <div class="qty-control">
+              <button onclick="updateQty('${id}',-1)">-</button>
+              <span>${cart[id]}</span>
+              <button onclick="updateQty('${id}',1)">+</button>
+            </div>`
+          }
+        </div>
+      `;
+
+      grid.appendChild(card);
     });
 
     menuContainer.appendChild(div);
   });
 }
 
-function updateQty(name, change) {
-  cart[name] = Math.max(0, cart[name] + change);
-  document.getElementById(`qty-${name}`).innerText = cart[name];
+/* === UPDATE QTY === */
+function updateQty(id, change) {
+
+  cart[id] = Math.max(0, cart[id] + change);
+
+  const control = document.getElementById(`control-${id}`);
+  if (!control) return;
+
+  if (cart[id] === 0) {
+
+    control.innerHTML =
+      `<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`;
+
+  } else {
+
+    control.innerHTML = `
+      <div class="qty-control">
+        <button onclick="updateQty('${id}',-1)">-</button>
+        <span>${cart[id]}</span>
+        <button onclick="updateQty('${id}',1)">+</button>
+      </div>
+    `;
+  }
+
   updateTotal();
 }
 
+/* === UPDATE TOTAL === */
 function updateTotal() {
+
   let total = 0;
 
   menuData.forEach(cat => {
     cat.items.forEach(item => {
-      total += cart[item.name] * item.price;
+      const id = makeId(item.name);
+      total += cart[id] * item.price;
     });
   });
 
@@ -51,45 +150,39 @@ function updateTotal() {
     const nama = document.getElementById('nama').value.trim();
     const tanggalInput = document.getElementById('tanggal').value;
 
-    if (!nama) {
-      alert('⚠️ Nama pemesan wajib diisi dulu');
-      return;
-    }
+    if (!nama) return alert('⚠️ Nama wajib diisi');
+    if (!tanggalInput) return alert('⚠️ Tanggal wajib diisi');
 
-    if (!tanggalInput) {
-      alert('⚠️ Tanggal pemesanan wajib diisi dulu');
-      return;
-    }
-
-    let tgl = new Date(tanggalInput);
-    const tanggal = tgl.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    });
+    const tanggal = new Date(tanggalInput)
+      .toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      });
 
     let adaPesanan = false;
 
-    // ✅ FORMAT WA JARAK TIPIS
     let msg =
       `PESANAN MAKANAN%0ALYNN Hotel Mojokerto%0A%0A` +
-      `Nama Pemesan:%0A${nama}%0A%0A` +
-      `Tanggal Pemesanan:%0A${tanggal}%0A%0A` +
+      `Nama:%0A${nama}%0A%0A` +
+      `Tanggal:%0A${tanggal}%0A%0A` +
       `Pesanan:%0A`;
 
     menuData.forEach(cat => {
       cat.items.forEach(item => {
-        if (cart[item.name] > 0) {
+
+        const id = makeId(item.name);
+
+        if (cart[id] > 0) {
           adaPesanan = true;
-          msg += `• ${item.name} x${cart[item.name]} - Rp ${(cart[item.name] * item.price).toLocaleString('id-ID')}%0A`;
+
+          msg +=
+            `• ${item.name} x${cart[id]} - Rp ${(cart[id] * item.price).toLocaleString('id-ID')}%0A`;
         }
       });
     });
 
-    if (!adaPesanan) {
-      alert('⚠️ Silakan pilih menu terlebih dahulu');
-      return;
-    }
+    if (!adaPesanan) return alert('⚠️ Pilih menu dulu');
 
     msg += `%0A${document.getElementById('total').innerText}`;
 
@@ -97,4 +190,6 @@ function updateTotal() {
   };
 }
 
+/* === INIT === */
+renderFilter();
 renderMenu();

@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Menu - LYNN Hotel Mojokerto</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-<style class="fix-form-ramadhan">
-input, .form-control{max-width:100%;width:100%;box-sizing:border-box;}
-.form-group{overflow:hidden;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Menu - LYNN Hotel Mojokerto</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+input,.form-control{
+  max-width:100%;
+  width:100%;
+  box-sizing:border-box;
+}
+.form-group{
+  overflow:hidden;
+}
 </style>
+
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <h1>LYNN Hotel Mojokerto</h1>
   <p>Restaurant & In-Room Dining Order</p>
 </header>
 
 <div class="container">
+
+  <!-- FORM PEMESAN -->
   <div class="field">
     <label>Nama Pemesan *</label>
     <input type="text" id="nama" placeholder="Masukkan nama pemesan">
@@ -28,9 +40,51 @@ input, .form-control{max-width:100%;width:100%;box-sizing:border-box;}
     <input type="date" id="tanggal">
   </div>
 
+  <!-- JUDUL MENU -->
+  <div class="menu-header">
+    <h1>KATEGORI MENU</h1>
+    <p>Silahkan pilih menu favorit Anda</p>
+
+    <div class="menu-filter">
+      <button class="active">SEMUA</button>
+      <button>APPETIZER</button>
+      <button>SOUP</button>
+      <button>ASIAN</button>
+      <button>WESTERN</button>
+      <button>DRINK</button>
+    </div>
+  </div>
+
+  <!-- MENU DINAMIS DARI JS -->
   <div id="menu"></div>
+
+  <!-- CONTOH STATIC CARD (OPSIONAL TESTING)
+  <div class="category">
+    <h2>APPETIZER</h2>
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <span class="menu-label">APPETIZER</span>
+        <img src="assets/images_menu/appetizer.jpg">
+        <div class="menu-info">
+          <b>Spring Roll</b>
+          <span>Rp 25.000</span>
+        </div>
+
+        <div class="qty">
+          <button>-</button>
+          <span>0</span>
+          <button>+</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  -->
+
 </div>
 
+<!-- CART -->
 <div class="cart">
   <div class="cart-content">
     <div id="total">Total: Rp 0</div>
@@ -38,14 +92,9 @@ input, .form-control{max-width:100%;width:100%;box-sizing:border-box;}
   </div>
 </div>
 
+<!-- JS -->
 <script src="assets/js/menu.js"></script>
 <script src="assets/js/app.js"></script>
+
 </body>
 </html>
-
-
-<!-- Contoh penggunaan gambar menu -->
-<!-- <div class="menu-card">
-     <img src="assets/images_menu/appetizer.jpg">
-     <h3>Nama Menu</h3>
-</div> -->

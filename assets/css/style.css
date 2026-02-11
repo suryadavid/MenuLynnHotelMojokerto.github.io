@@ -1,52 +1,226 @@
-body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f6f8;color:#222}
-header{background:#0b2c4d;color:#fff;padding:16px;text-align:center}
-header p{margin:4px 0 0;font-size:13px}
-.container{padding:16px;max-width:720px;margin:auto}
-.field{margin-bottom:16px}
-label{font-weight:bold;font-size:14px}
-input{width:100%;padding:10px;margin-top:6px;border:1px solid #ccc;border-radius:6px}
-.category{margin-top:24px}
-.category h2{font-size:18px;border-bottom:2px solid #ddd;padding-bottom:6px}
-.menu-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #ddd}
-.menu-name{font-weight:600}
-.price{font-size:13px;color:#555}
-.qty{display:flex;align-items:center;gap:8px}
-.qty button{padding:4px 10px;border:none;border-radius:4px;background:#0b2c4d;color:#fff;cursor:pointer}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;padding:12px}
-.cart-content{max-width:720px;margin:auto;display:flex;justify-content:space-between;align-items:center}
-.wa-btn{background:#25D366;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;font-weight:bold}
+/* === RESET === */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
+/* === BODY GOLD HOTEL === */
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#9c7333;
+  color:#222;
+  padding-bottom:120px;
+}
 
-/* === Tambahan desain gambar menu === */
+/* === CONTAINER === */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+/* === HEADER MENU === */
+.menu-header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.menu-header h1{
+  letter-spacing:6px;
+  font-size:28px;
+  color:#fff;
+}
+
+.menu-header p{
+  font-size:13px;
+  color:#f5f5f5;
+  margin-top:8px;
+}
+
+/* === FILTER === */
+.menu-filter{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+.menu-filter button{
+  border:none;
+  padding:8px 16px;
+  border-radius:20px;
+  background:#ffffffcc;
+  cursor:pointer;
+  font-size:12px;
+  transition:0.2s;
+}
+
+.menu-filter button.active{
+  background:#fff;
+  color:#9c7333;
+  font-weight:bold;
+}
+
+/* === CATEGORY TITLE === */
+.category{
+  margin-top:40px;
+}
+
+.category h2{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#fff;
+}
+
+/* === GRID MENU === */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+/* === CARD MENU === */
+.menu-card{
+  background:#fff;
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+  position:relative;
+  transition:0.2s;
+}
+
+.menu-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 18px rgba(0,0,0,0.12);
+}
+
+/* LABEL */
+.menu-label{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#9c7333;
+  color:#fff;
+  font-size:10px;
+  padding:4px 8px;
+  border-radius:12px;
+}
+
+/* IMAGE */
 .menu-card img{
   width:100%;
-  height:160px;
+  height:150px;
   object-fit:cover;
   border-radius:10px;
   margin-bottom:10px;
 }
 
+/* INFO */
+.menu-info{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  margin-bottom:10px;
+}
 
-/* === FIX TOUCH & SCROLL MOBILE === */
-html, body{
+.menu-info b{
+  color:#9c7333;
+}
+
+/* === ADD BUTTON === */
+.add-btn{
+  width:100%;
+  border:1.5px solid #9c7333;
+  color:#9c7333;
+  background:#fff;
+  padding:8px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.add-btn:hover{
+  background:#9c7333;
+  color:#fff;
+}
+
+/* === QTY CONTROL SLIM FRIENDLY === */
+.qty-control{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  border:1.5px solid #9c7333;
+  border-radius:20px;
+  padding:4px 10px;
+  height:34px;
+  background:#f7f1e6;
+  font-weight:bold;
+}
+
+.qty-control button{
+  border:none;
+  background:#9c7333;
+  color:#fff;
+  width:24px;
+  height:24px;
+  min-height:auto;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.qty-control span{
+  font-size:14px;
+  min-width:18px;
+  text-align:center;
+}
+
+/* === CART BOTTOM === */
+.cart{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#ffffff;
+  border-top:1px solid #ddd;
+  padding:14px;
+  box-shadow:0 -4px 12px rgba(0,0,0,0.08);
+}
+
+.cart-content{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:bold;
+}
+
+.wa-btn{
+  background:#25D366;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* === MOBILE FIX === */
+html,body{
   scroll-behavior:smooth;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 }
 
-body{
-  padding-bottom:120px; /* supaya menu paling bawah tidak ketutup */
+button{
+  min-height:44px;
 }
 
-.menu-card{
-  padding:12px;
-}
-
-.menu-card a, button{
-  min-height:44px; /* standar sentuhan jari mobile */
-  display:block;
-}
-
-/* hindari element nutup bagian bawah */
-footer, .footer, .bottom-bar{
-  position:relative !important;
+/* override khusus qty */
+.qty-control button{
+  min-height:auto !important;
 }
