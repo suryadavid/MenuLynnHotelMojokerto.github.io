@@ -75,7 +75,7 @@ function renderMenu() {
 
       card.innerHTML = `
         <span class="menu-label">${cat.category}</span>
-        <img src="${item.image || 'assets/images_menu/default.jpg'}">
+        <img src="${item.image || 'assets/images_menu/default.png'}">
 
         <div class="menu-info">
           <b>${item.name}</b>

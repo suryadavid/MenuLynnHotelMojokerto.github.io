@@ -1,11 +1,16 @@
-/* === RESET === */
+/* ================= RESET ================= */
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-/* === BODY GOLD HOTEL === */
+html,body{
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* ================= BODY GOLD HOTEL ================= */
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#9c7333;
@@ -13,14 +18,87 @@ body{
   padding-bottom:120px;
 }
 
-/* === CONTAINER === */
+/* ================= HEADER HOTEL ================= */
+.top-header{
+  background:linear-gradient(90deg,#d6a84a,#9c7333);
+  color:#fff;
+}
+
+.header-title{
+  text-align:center;
+  padding:14px;
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.header-info{
+  background:#fff;
+  color:#333;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  padding:12px;
+  flex-wrap:wrap;
+}
+
+.header-info img{
+  height:60px;
+}
+
+.contact{
+  font-size:12px;
+  text-align:center;
+}
+
+/* ================= WELCOME BANNER ================= */
+.welcome-banner{
+  position:relative;
+  height:260px;
+  background:url("images/banner.jpg") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:#fff;
+}
+
+.welcome-banner .overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+}
+
+.banner-text{
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+
+.banner-text h2{
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+.banner-text p{
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.banner-text span{
+  font-size:12px;
+  opacity:0.9;
+}
+
+/* ================= CONTAINER ================= */
 .container{
   max-width:900px;
   margin:auto;
   padding:20px;
 }
 
-/* === HEADER MENU === */
+/* ================= HEADER MENU ================= */
 .menu-header{
   text-align:center;
   margin-bottom:30px;
@@ -38,7 +116,7 @@ body{
   margin-top:8px;
 }
 
-/* === FILTER === */
+/* ================= FILTER ================= */
 .menu-filter{
   display:flex;
   justify-content:center;
@@ -63,7 +141,7 @@ body{
   font-weight:bold;
 }
 
-/* === CATEGORY TITLE === */
+/* ================= CATEGORY ================= */
 .category{
   margin-top:40px;
 }
@@ -74,14 +152,14 @@ body{
   color:#fff;
 }
 
-/* === GRID MENU === */
+/* ================= GRID ================= */
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:18px;
 }
 
-/* === CARD MENU === */
+/* ================= CARD ================= */
 .menu-card{
   background:#fff;
   border-radius:16px;
@@ -130,7 +208,7 @@ body{
   color:#9c7333;
 }
 
-/* === ADD BUTTON === */
+/* ================= ADD BUTTON ================= */
 .add-btn{
   width:100%;
   border:1.5px solid #9c7333;
@@ -148,7 +226,7 @@ body{
   color:#fff;
 }
 
-/* === QTY CONTROL SLIM FRIENDLY === */
+/* ================= QTY CONTROL ================= */
 .qty-control{
   display:flex;
   justify-content:center;
@@ -168,7 +246,6 @@ body{
   color:#fff;
   width:24px;
   height:24px;
-  min-height:auto;
   border-radius:50%;
   cursor:pointer;
   font-size:14px;
@@ -180,7 +257,7 @@ body{
   text-align:center;
 }
 
-/* === CART BOTTOM === */
+/* ================= CART ================= */
 .cart{
   position:fixed;
   bottom:0;
@@ -210,17 +287,28 @@ body{
   font-weight:bold;
 }
 
-/* === MOBILE FIX === */
-html,body{
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
-}
-
+/* ================= MOBILE ================= */
 button{
   min-height:44px;
 }
 
-/* override khusus qty */
 .qty-control button{
   min-height:auto !important;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:600px){
+
+.banner-text h2{
+  font-size:20px;
+}
+
+.menu-grid{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.header-info{
+  flex-direction:column;
+}
+
 }
