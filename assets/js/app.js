@@ -172,22 +172,22 @@ let adaPesanan=false;
 let total=0;
 
 let msg=
-`🍽️ *ASTABRATA RESTAURANT*%0A`+
-`🧾 *ORDER MASUK*%0A`+
+`*ASTABRATA RESTAURANT*%0A`+
+`*ORDER MASUK*%0A`+
 `━━━━━━━━━━━━━━━━━━%0A%0A`+
 
-`👤 *Nama Tamu*%0A${nama}%0A%0A`+
-`📅 *Tanggal Pemesanan*%0A${tanggal}%0A%0A`+
-`⏰ *Jam*%0A${jam} WIB%0A%0A`+
-`🛎️ *Layanan*%0A${layanan}%0A%0A`;
+`*Nama Tamu*%0A${nama}%0A%0A`+
+`*Tanggal Pemesanan*%0A${tanggal}%0A%0A`+
+`*Jam*%0A${jam} WIB%0A%0A`+
+`*Layanan*%0A${layanan}%0A%0A`;
 
 if(kamar){
-msg+=`🏨 *Nomor Kamar*%0A${kamar}%0A%0A`;
+msg+=`*Nomor Kamar*%0A${kamar}%0A%0A`;
 }
 
 msg+=
 `━━━━━━━━━━━━━━━━━━%0A`+
-`📋 *DETAIL PESANAN*%0A%0A`;
+`*DETAIL PESANAN*%0A%0A`;
 
 menuData.forEach(cat=>{
 cat.items.forEach(item=>{
@@ -198,8 +198,8 @@ adaPesanan=true;
 total+=cart[id]*item.price;
 
 msg+=
-`🍴 ${item.name} x${cart[id]}%0A`+
-`💰 Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A%0A`;
+`${item.name} x${cart[id]}%0A`+
+`Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A%0A`;
 }
 });
 });
@@ -209,8 +209,8 @@ if(!adaPesanan) return alert('Pilih menu dulu');
 msg+=
 `━━━━━━━━━━━━━━━━━━%0A`+
 `💳 *TOTAL PEMBAYARAN*%0A`+
-`Rp ${total.toLocaleString('id-ID')}%0A%0A`+
-`🙏 Mohon segera diproses`;
+`*Rp ${total.toLocaleString('id-ID')}*%0A%0A`+
+`*🙏 Mohon segera diproses*`;
 
 window.open('https://wa.me/6285974511215?text='+msg,'_blank');
 
