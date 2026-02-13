@@ -130,7 +130,7 @@ control.innerHTML=`
 updateTotal();
 }
 
-/* === UPDATE TOTAL + WA === */
+/* === UPDATE TOTAL === */
 function updateTotal(){
 
 let total=0;
@@ -145,7 +145,10 @@ total+=cart[id]*item.price;
 document.getElementById('total').innerText=
 'Total: Rp '+total.toLocaleString('id-ID');
 
-document.getElementById('waBtn').onclick=()=>{
+}
+
+/* === KIRIM WA === */
+document.getElementById('waBtn').addEventListener('click',()=>{
 
 const nama=document.getElementById('nama').value.trim();
 const tanggalInput=document.getElementById('tanggal').value;
@@ -166,6 +169,7 @@ year:"numeric"
 });
 
 let adaPesanan=false;
+let total=0;
 
 let msg=
 `🍽️ *ASTABRATA RESTAURANT*%0A`+
@@ -191,6 +195,7 @@ const id=makeId(item.name);
 
 if(cart[id]>0){
 adaPesanan=true;
+total+=cart[id]*item.price;
 
 msg+=
 `🍴 ${item.name} x${cart[id]}%0A`+
@@ -209,9 +214,7 @@ msg+=
 
 window.open('https://wa.me/6285974511215?text='+msg,'_blank');
 
-};
-
-}
+});
 
 /* === INIT === */
 renderFilter();
