@@ -151,12 +151,12 @@ const nama=document.getElementById('nama').value.trim();
 const tanggalInput=document.getElementById('tanggal').value;
 const jam=document.getElementById('jam').value;
 const layanan=document.getElementById('layanan').value;
-const kamar=document.getElementById('nomor_kamar')?.value || '-';
+const kamar=document.getElementById('nomor_kamar').value.trim();
 
-if(!nama) return alert('⚠️ Nama wajib diisi');
-if(!tanggalInput) return alert('⚠️ Tanggal wajib diisi');
-if(!jam) return alert('⚠️ Jam wajib diisi');
-if(!layanan) return alert('⚠️ Pilih layanan');
+if(!nama) return alert('Nama wajib diisi');
+if(!tanggalInput) return alert('Tanggal wajib diisi');
+if(!jam) return alert('Jam wajib diisi');
+if(!layanan) return alert('Pilih layanan');
 
 const tanggal=new Date(tanggalInput)
 .toLocaleDateString("id-ID",{
@@ -168,22 +168,22 @@ year:"numeric"
 let adaPesanan=false;
 
 let msg=
-`🍽️ *ASTABRATA RESTAURANT*%0A`+
-`🧾 *ORDER MASUK*%0A`+
-`━━━━━━━━━━━━━━━━━━%0A%0A`+
+`ASTABRATA RESTAURANT%0A`+
+`ORDER MASUK%0A`+
+`------------------------%0A%0A`+
 
-`👤 *Nama Tamu*%0A${nama}%0A%0A`+
-`📅 *Tanggal Reservasi*%0A${tanggal}%0A%0A`+
-`⏰ *Jam*%0A${jam} WIB%0A%0A`+
-`🛎️ *Layanan*%0A${layanan}%0A`;
+`Nama Tamu:%0A${nama}%0A%0A`+
+`Tanggal Reservasi:%0A${tanggal}%0A%0A`+
+`Jam:%0A${jam} WIB%0A%0A`+
+`Layanan:%0A${layanan}%0A%0A`;
 
-if(layanan==="Room Service"){
-msg+=`🏨 *Nomor Kamar*%0A${kamar}%0A`;
+if(kamar){
+msg+=`Nomor Kamar:%0A${kamar}%0A%0A`;
 }
 
 msg+=
-`%0A━━━━━━━━━━━━━━━━━━%0A`+
-`📋 *DETAIL PESANAN*%0A%0A`;
+`------------------------%0A`+
+`DETAIL PESANAN%0A%0A`;
 
 menuData.forEach(cat=>{
 cat.items.forEach(item=>{
@@ -193,19 +193,18 @@ if(cart[id]>0){
 adaPesanan=true;
 
 msg+=
-`🍽️ ${item.name} x${cart[id]}%0A`+
-`💰 Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A%0A`;
+`${item.name} x${cart[id]}%0A`+
+`Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A%0A`;
 }
 });
 });
 
-if(!adaPesanan) return alert('⚠️ Pilih menu dulu');
+if(!adaPesanan) return alert('Pilih menu dulu');
 
 msg+=
-`━━━━━━━━━━━━━━━━━━%0A`+
-`💳 *TOTAL PEMBAYARAN*%0A`+
-`Rp ${total.toLocaleString('id-ID')}%0A%0A`+
-`📌 Mohon segera diproses ya 🙏`;
+`------------------------%0A`+
+`TOTAL PEMBAYARAN%0A`+
+`Rp ${total.toLocaleString('id-ID')}`;
 
 window.open('https://wa.me/6285974511215?text='+msg,'_blank');
 
