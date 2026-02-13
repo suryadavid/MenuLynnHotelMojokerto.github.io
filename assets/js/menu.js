@@ -146,24 +146,6 @@ const menuData = [
   },
 
   {
-    category: "MILKSHAKE",
-    items: [
-      { name: "Milkshake Chocolate", price: 35000, image: "assets/images_menu/Milkshake Chocolate.png" },
-      { name: "Milkshake Strawberry", price: 35000, image: "assets/images_menu/Milkshake Strawberry.png" },
-      { name: "Milkshake Vanilla", price: 35000, image: "assets/images_menu/Milkshake Vanilla.png" }
-    ]
-  },
-
-  {
-    category: "MOCKTAIL",
-    items: [
-      { name: "Sparkling Lychee Butterfly Pea Tea", price: 25000, image: "assets/images_menu/Sparkling Lychee Butterfly Pea Tea.png" },
-      { name: "Watermelon Lemonade", price: 25000, image: "assets/images_menu/Watermelon Lemonade.png" },
-      { name: "Summer Strawberry Ly", price: 27000, image: "assets/images_menu/Summer Strawberry Ly.png" }
-    ]
-  },
-
-  {
     category: "OLEH-OLEH",
     items: [
       { name: "Brownies", price: 70000, image: "assets/images_menu/Brownies.png" },
