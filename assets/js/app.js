@@ -168,31 +168,44 @@ year:"numeric"
 let adaPesanan=false;
 
 let msg=
-`PESANAN MAKANAN%0ALYNN Hotel Mojokerto%0A%0A`+
-`Nama:%0A${nama}%0A%0A`+
-`Tanggal:%0A${tanggal}%0A%0A`+
-`Jam:%0A${jam}%0A%0A`+
-`Layanan:%0A${layanan}%0A`;
+`🍽️ *ASTABRATA RESTAURANT*%0A`+
+`🧾 *ORDER MASUK*%0A`+
+`━━━━━━━━━━━━━━━━━━%0A%0A`+
+
+`👤 *Nama Tamu*%0A${nama}%0A%0A`+
+`📅 *Tanggal Reservasi*%0A${tanggal}%0A%0A`+
+`⏰ *Jam*%0A${jam} WIB%0A%0A`+
+`🛎️ *Layanan*%0A${layanan}%0A`;
 
 if(layanan==="Room Service"){
-msg+=`Nomor Kamar:%0A${kamar}%0A`;
+msg+=`🏨 *Nomor Kamar*%0A${kamar}%0A`;
 }
 
-msg+=`%0APesanan:%0A`;
+msg+=
+`%0A━━━━━━━━━━━━━━━━━━%0A`+
+`📋 *DETAIL PESANAN*%0A%0A`;
 
 menuData.forEach(cat=>{
 cat.items.forEach(item=>{
 const id=makeId(item.name);
+
 if(cart[id]>0){
 adaPesanan=true;
-msg+=`• ${item.name} x${cart[id]} - Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A`;
+
+msg+=
+`🍽️ ${item.name} x${cart[id]}%0A`+
+`💰 Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A%0A`;
 }
 });
 });
 
 if(!adaPesanan) return alert('⚠️ Pilih menu dulu');
 
-msg+=`%0A${document.getElementById('total').innerText}`;
+msg+=
+`━━━━━━━━━━━━━━━━━━%0A`+
+`💳 *TOTAL PEMBAYARAN*%0A`+
+`Rp ${total.toLocaleString('id-ID')}%0A%0A`+
+`📌 Mohon segera diproses ya 🙏`;
 
 window.open('https://wa.me/6285974511215?text='+msg,'_blank');
 
