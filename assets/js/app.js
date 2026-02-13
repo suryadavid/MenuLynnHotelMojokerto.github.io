@@ -5,189 +5,199 @@ let cart = {};
 let activeFilter = "SEMUA";
 
 /* === BUAT ID AMAN === */
-function makeId(text) {
-  return text.replace(/\s+/g, '-').replace(/[^\w-]/g, '').toLowerCase();
+function makeId(text){
+return text.replace(/\s+/g,'-').replace(/[^\w-]/g,'').toLowerCase();
 }
 
-/* === BUAT FILTER OTOMATIS === */
-function renderFilter() {
+/* === FILTER === */
+function renderFilter(){
 
-  filterContainer.innerHTML = '';
+filterContainer.innerHTML='';
 
-  const semuaBtn = document.createElement('button');
-  semuaBtn.textContent = "SEMUA";
-  semuaBtn.classList.add('active');
-  semuaBtn.onclick = () => setFilter("SEMUA");
-  filterContainer.appendChild(semuaBtn);
+const semuaBtn=document.createElement('button');
+semuaBtn.textContent="SEMUA";
+semuaBtn.classList.add('active');
+semuaBtn.onclick=()=>setFilter("SEMUA");
+filterContainer.appendChild(semuaBtn);
 
-  menuData.forEach(cat => {
+menuData.forEach(cat=>{
+const btn=document.createElement('button');
+btn.textContent=cat.category;
+btn.onclick=()=>setFilter(cat.category);
+filterContainer.appendChild(btn);
+});
 
-    const btn = document.createElement('button');
-    btn.textContent = cat.category;
-
-    btn.onclick = () => setFilter(cat.category);
-
-    filterContainer.appendChild(btn);
-  });
 }
 
 /* === SET FILTER === */
-function setFilter(category) {
+function setFilter(category){
 
-  activeFilter = category;
+activeFilter=category;
 
-  document.querySelectorAll('.menu-filter button')
-    .forEach(b => b.classList.remove('active'));
+document.querySelectorAll('.menu-filter button')
+.forEach(b=>b.classList.remove('active'));
 
-  [...document.querySelectorAll('.menu-filter button')]
-    .find(b => b.textContent === category)
-    ?.classList.add('active');
+[...document.querySelectorAll('.menu-filter button')]
+.find(b=>b.textContent===category)
+?.classList.add('active');
 
-  renderMenu();
+renderMenu();
 }
 
 /* === RENDER MENU === */
-function renderMenu() {
+function renderMenu(){
 
-  menuContainer.innerHTML = '';
+menuContainer.innerHTML='';
 
-  menuData.forEach(cat => {
+menuData.forEach(cat=>{
 
-    if (activeFilter !== "SEMUA" && activeFilter !== cat.category) return;
+if(activeFilter!=="SEMUA" && activeFilter!==cat.category) return;
 
-    const div = document.createElement('div');
-    div.className = 'category';
+const div=document.createElement('div');
+div.className='category';
 
-    div.innerHTML = `
-      <h2>${cat.category}</h2>
-      <div class="menu-grid"></div>
-    `;
+div.innerHTML=`
+<h2>${cat.category}</h2>
+<div class="menu-grid"></div>
+`;
 
-    const grid = div.querySelector('.menu-grid');
+const grid=div.querySelector('.menu-grid');
 
-    cat.items.forEach(item => {
+cat.items.forEach(item=>{
 
-      const id = makeId(item.name);
-      if (!(id in cart)) cart[id] = 0;
+const id=makeId(item.name);
+if(!(id in cart)) cart[id]=0;
 
-      const card = document.createElement('div');
-      card.className = 'menu-card';
+const card=document.createElement('div');
+card.className='menu-card';
 
-      card.innerHTML = `
-        <span class="menu-label">${cat.category}</span>
-        <img src="${item.image || 'assets/images_menu/default.png'}">
+card.innerHTML=`
+<span class="menu-label">${cat.category}</span>
+<img src="${item.image || 'assets/images_menu/default.png'}">
 
-        <div class="menu-info">
-          <b>${item.name}</b>
-          <span>Rp ${item.price.toLocaleString('id-ID')}</span>
-        </div>
+<div class="menu-info">
+<b>${item.name}</b>
+<span>Rp ${item.price.toLocaleString('id-ID')}</span>
+</div>
 
-        <div id="control-${id}">
-          ${
-            cart[id] === 0
-            ? `<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`
-            : `
-            <div class="qty-control">
-              <button onclick="updateQty('${id}',-1)">-</button>
-              <span>${cart[id]}</span>
-              <button onclick="updateQty('${id}',1)">+</button>
-            </div>`
-          }
-        </div>
-      `;
+<div id="control-${id}">
+${
+cart[id]===0
+? `<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`
+: `
+<div class="qty-control">
+<button onclick="updateQty('${id}',-1)">-</button>
+<span>${cart[id]}</span>
+<button onclick="updateQty('${id}',1)">+</button>
+</div>`
+}
+</div>
+`;
 
-      grid.appendChild(card);
-    });
+grid.appendChild(card);
+});
 
-    menuContainer.appendChild(div);
-  });
+menuContainer.appendChild(div);
+
+});
+
 }
 
 /* === UPDATE QTY === */
-function updateQty(id, change) {
+function updateQty(id,change){
 
-  cart[id] = Math.max(0, cart[id] + change);
+cart[id]=Math.max(0,cart[id]+change);
 
-  const control = document.getElementById(`control-${id}`);
-  if (!control) return;
+const control=document.getElementById(`control-${id}`);
+if(!control) return;
 
-  if (cart[id] === 0) {
+if(cart[id]===0){
 
-    control.innerHTML =
-      `<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`;
+control.innerHTML=
+`<button class="add-btn" onclick="updateQty('${id}',1)">+ Tambahkan</button>`;
 
-  } else {
+}else{
 
-    control.innerHTML = `
-      <div class="qty-control">
-        <button onclick="updateQty('${id}',-1)">-</button>
-        <span>${cart[id]}</span>
-        <button onclick="updateQty('${id}',1)">+</button>
-      </div>
-    `;
-  }
-
-  updateTotal();
+control.innerHTML=`
+<div class="qty-control">
+<button onclick="updateQty('${id}',-1)">-</button>
+<span>${cart[id]}</span>
+<button onclick="updateQty('${id}',1)">+</button>
+</div>
+`;
 }
 
-/* === UPDATE TOTAL === */
-function updateTotal() {
+updateTotal();
+}
 
-  let total = 0;
+/* === UPDATE TOTAL + WA === */
+function updateTotal(){
 
-  menuData.forEach(cat => {
-    cat.items.forEach(item => {
-      const id = makeId(item.name);
-      total += cart[id] * item.price;
-    });
-  });
+let total=0;
 
-  document.getElementById('total').innerText =
-    'Total: Rp ' + total.toLocaleString('id-ID');
+menuData.forEach(cat=>{
+cat.items.forEach(item=>{
+const id=makeId(item.name);
+total+=cart[id]*item.price;
+});
+});
 
-  document.getElementById('waBtn').onclick = () => {
+document.getElementById('total').innerText=
+'Total: Rp '+total.toLocaleString('id-ID');
 
-    const nama = document.getElementById('nama').value.trim();
-    const tanggalInput = document.getElementById('tanggal').value;
+document.getElementById('waBtn').onclick=()=>{
 
-    if (!nama) return alert('⚠️ Nama wajib diisi');
-    if (!tanggalInput) return alert('⚠️ Tanggal wajib diisi');
+const nama=document.getElementById('nama').value.trim();
+const tanggalInput=document.getElementById('tanggal').value;
+const jam=document.getElementById('jam').value;
+const layanan=document.getElementById('layanan').value;
+const kamar=document.getElementById('nomor_kamar')?.value || '-';
 
-    const tanggal = new Date(tanggalInput)
-      .toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
-      });
+if(!nama) return alert('⚠️ Nama wajib diisi');
+if(!tanggalInput) return alert('⚠️ Tanggal wajib diisi');
+if(!jam) return alert('⚠️ Jam wajib diisi');
+if(!layanan) return alert('⚠️ Pilih layanan');
 
-    let adaPesanan = false;
+const tanggal=new Date(tanggalInput)
+.toLocaleDateString("id-ID",{
+day:"2-digit",
+month:"long",
+year:"numeric"
+});
 
-    let msg =
-      `PESANAN MAKANAN%0ALYNN Hotel Mojokerto%0A%0A` +
-      `Nama:%0A${nama}%0A%0A` +
-      `Tanggal:%0A${tanggal}%0A%0A` +
-      `Pesanan:%0A`;
+let adaPesanan=false;
 
-    menuData.forEach(cat => {
-      cat.items.forEach(item => {
+let msg=
+`PESANAN MAKANAN%0ALYNN Hotel Mojokerto%0A%0A`+
+`Nama:%0A${nama}%0A%0A`+
+`Tanggal:%0A${tanggal}%0A%0A`+
+`Jam:%0A${jam}%0A%0A`+
+`Layanan:%0A${layanan}%0A`;
 
-        const id = makeId(item.name);
+if(layanan==="Room Service"){
+msg+=`Nomor Kamar:%0A${kamar}%0A`;
+}
 
-        if (cart[id] > 0) {
-          adaPesanan = true;
+msg+=`%0APesanan:%0A`;
 
-          msg +=
-            `• ${item.name} x${cart[id]} - Rp ${(cart[id] * item.price).toLocaleString('id-ID')}%0A`;
-        }
-      });
-    });
+menuData.forEach(cat=>{
+cat.items.forEach(item=>{
+const id=makeId(item.name);
+if(cart[id]>0){
+adaPesanan=true;
+msg+=`• ${item.name} x${cart[id]} - Rp ${(cart[id]*item.price).toLocaleString('id-ID')}%0A`;
+}
+});
+});
 
-    if (!adaPesanan) return alert('⚠️ Pilih menu dulu');
+if(!adaPesanan) return alert('⚠️ Pilih menu dulu');
 
-    msg += `%0A${document.getElementById('total').innerText}`;
+msg+=`%0A${document.getElementById('total').innerText}`;
 
-    window.open('https://wa.me/6285974511215?text=' + msg, '_blank');
-  };
+window.open('https://wa.me/6285974511215?text='+msg,'_blank');
+
+};
+
 }
 
 /* === INIT === */

@@ -3,96 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Menu - LYNN Hotel Mojokerto</title>
+<title>Order Menu - Astabrata Restaurant</title>
 
 <link rel="stylesheet" href="assets/css/style.css">
 
 <style>
-input,.form-control{
-  max-width:100%;
-  width:100%;
-  box-sizing:border-box;
-}
-.form-group{
-  overflow:hidden;
-}
-</style>
 
+/* INPUT */
+input,.form-control,select{
+max-width:100%;
+width:100%;
+box-sizing:border-box;
+padding:10px;
+}
+
+.field{
+margin-bottom:15px;
+}
+
+/* HERO HEADER */
+.hero-header{
+position:relative;
+padding:40px 20px 50px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:#fff;
+background:
+linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url("assets/images/banner.jpg") center/cover no-repeat;
+border-bottom-left-radius:30px;
+border-bottom-right-radius:30px;
+}
+
+.hero-content{
+max-width:750px;
+}
+
+.hero-content h1{
+font-size:28px;
+font-weight:bold;
+letter-spacing:3px;
+margin-bottom:10px;
+}
+
+.hero-content h2{
+font-size:16px;
+letter-spacing:2px;
+margin-bottom:6px;
+opacity:0.9;
+}
+
+.hero-content p{
+font-size:13px;
+opacity:0.85;
+margin-bottom:12px;
+}
+
+/* HOTEL INFO */
+.hotel-info{
+font-size:12px;
+line-height:1.6;
+opacity:0.9;
+margin-top:25px; /* JARAK KEBAWAH */
+}
+
+/* PRICE INFO */
+.price-info{
+text-align:center;
+margin:25px auto 35px;
+padding:0 15px;
+max-width:900px;
+}
+
+.price-info p{
+font-size:16px;
+line-height:1.6;
+padding-bottom:12px;
+border-bottom:2px solid #000;
+margin:0;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+.hero-content h1{font-size:22px;}
+.hero-content h2{font-size:14px;}
+
+.hotel-info{
+font-size:11px;
+margin-top:20px;
+}
+
+.price-info p{
+font-size:13px;
+border-bottom:1.5px solid #000;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header>
-  <h1>LYNN Hotel Mojokerto</h1>
-  <p>Restaurant & In-Room Dining Order</p>
+<header class="hero-header">
+<div class="hero-content">
+
+  <h1>Lynn Hotel Mojokerto
+  <h1>Welcome to the Astabrata Restaurant</h1>
+  <h2>Selamat datang! Dive into deliciousness at Astabrata Restaurant</h2>
+  <h2>Restaurant In-Room Dining Order</h2>
+
+<div class="hotel-info">
+<p>Jl. Empunala No.87 Mojokerto, Jawa Timur 61314 - Indonesia</p>
+<p>Phone : (0321) 5285-000 / WA : (0812) 3146-3186</p>
+<p>Email : mojokerto@lynnhotelsandresorts.com</p>
+</div>
+
+</div>
 </header>
 
 <div class="container">
 
-  <!-- FORM PEMESAN -->
-  <div class="field">
-    <label>Nama Pemesan *</label>
-    <input type="text" id="nama" placeholder="Masukkan nama pemesan">
-  </div>
+<div class="field">
+<label>Nama Pemesan *</label>
+<input type="text" id="nama" placeholder="Masukkan nama pemesan">
+</div>
 
-  <div class="field">
-    <label>Tanggal Pemesanan *</label>
-    <input type="date" id="tanggal">
-  </div>
+<div class="field">
+<label>Tanggal Pemesanan *</label>
+<input type="date" id="tanggal">
+</div>
 
-  <!-- JUDUL MENU -->
-  <div class="menu-header">
-    <h1>KATEGORI MENU</h1>
-    <p>Silahkan pilih menu favorit Anda</p>
+<div class="field">
+<label>Jam Pemesanan *</label>
+<input type="time" id="jam">
+</div>
 
-    <div class="menu-filter">
-      <button class="active">SEMUA</button>
-      <button>APPETIZER</button>
-      <button>SOUP</button>
-      <button>ASIAN</button>
-      <button>WESTERN</button>
-      <button>DRINK</button>
-    </div>
-  </div>
+<div class="field">
+<label>Jenis Layanan *</label>
+<select id="layanan">
+<option value="">-- Pilih Layanan --</option>
+<option>Dine In</option>
+<option>Room Service</option>
+</select>
+</div>
 
-  <!-- MENU DINAMIS DARI JS -->
-  <div id="menu"></div>
+<div class="menu-header">
+<h1>KATEGORI MENU</h1>
 
-  <!-- CONTOH STATIC CARD (OPSIONAL TESTING)
-  <div class="category">
-    <h2>APPETIZER</h2>
-    <div class="menu-grid">
+<div class="menu-filter">
+<button class="active">SEMUA</button>
+<button>APPETIZER</button>
+<button>SOUP</button>
+<button>ASIAN</button>
+<button>WESTERN</button>
+<button>DRINK</button>
+</div>
+</div>
 
-      <div class="menu-card">
-        <span class="menu-label">APPETIZER</span>
-        <img src="assets/images_menu/appetizer.jpg">
-        <div class="menu-info">
-          <b>Spring Roll</b>
-          <span>Rp 25.000</span>
-        </div>
+<div class="price-info">
+<p>All Price in thousand Rupiah. Inclusive of Tax & Service Charge 21%</p>
+</div>
 
-        <div class="qty">
-          <button>-</button>
-          <span>0</span>
-          <button>+</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  -->
+<div id="menu"></div>
 
 </div>
 
-<!-- CART -->
 <div class="cart">
-  <div class="cart-content">
-    <div id="total">Total: Rp 0</div>
-    <a href="#" id="waBtn" class="wa-btn">Kirim ke WhatsApp</a>
-  </div>
+<div class="cart-content">
+<div id="total">Total: Rp 0</div>
+<a href="#" id="waBtn" class="wa-btn">Kirim ke WhatsApp</a>
+</div>
 </div>
 
-<!-- JS -->
 <script src="assets/js/menu.js"></script>
 <script src="assets/js/app.js"></script>
 

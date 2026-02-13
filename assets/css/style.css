@@ -8,14 +8,36 @@
 html,body{
   scroll-behavior:smooth;
   -webkit-overflow-scrolling:touch;
+  height:100%;
 }
 
-/* ================= BODY GOLD HOTEL ================= */
+/* ================= BODY GOLD HOTEL BG HD ================= */
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#9c7333;
   color:#222;
   padding-bottom:120px;
+  position:relative;
+
+  background-image:url("../images/bg-lynn-hd.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* OVERLAY */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(156,115,51,0.78);
+  z-index:0;
+}
+
+/* SEMUA CONTENT DI ATAS BG */
+body > *{
+  position:relative;
+  z-index:1;
 }
 
 /* ================= HEADER HOTEL ================= */
@@ -52,37 +74,41 @@ body{
   text-align:center;
 }
 
-/* ================= WELCOME BANNER ================= */
+/* ================= WELCOME BANNER PREMIUM ================= */
 .welcome-banner{
   position:relative;
-  height:260px;
-  background:url("images/banner.jpg") center/cover no-repeat;
+  min-height:280px;
+  padding:100px 20px 60px;
+  background:url("../images/banner.jpg") center/cover no-repeat;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-end;
   text-align:center;
   color:#fff;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
 }
 
 .welcome-banner .overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.45);
 }
 
 .banner-text{
   position:relative;
   z-index:2;
-  padding:20px;
+  max-width:750px;
 }
 
 .banner-text h2{
-  font-size:26px;
-  margin-bottom:10px;
+  font-size:28px;
+  margin-bottom:12px;
+  letter-spacing:2px;
 }
 
 .banner-text p{
-  font-size:14px;
+  font-size:15px;
   margin-bottom:6px;
 }
 
@@ -114,6 +140,22 @@ body{
   font-size:13px;
   color:#f5f5f5;
   margin-top:8px;
+}
+
+/* ================= PRICE INFO ================= */
+.price-info{
+  text-align:center;
+  margin:25px auto 35px;
+  padding:0 15px;
+  max-width:900px;
+}
+
+.price-info p{
+  font-size:15px;
+  line-height:1.6;
+  padding-bottom:12px;
+  border-bottom:2px solid #f1e2c6;
+  color:#fff;
 }
 
 /* ================= FILTER ================= */
@@ -174,7 +216,6 @@ body{
   box-shadow:0 10px 18px rgba(0,0,0,0.12);
 }
 
-/* LABEL */
 .menu-label{
   position:absolute;
   top:10px;
@@ -186,7 +227,6 @@ body{
   border-radius:12px;
 }
 
-/* IMAGE */
 .menu-card img{
   width:100%;
   height:150px;
@@ -195,7 +235,6 @@ body{
   margin-bottom:10px;
 }
 
-/* INFO */
 .menu-info{
   display:flex;
   justify-content:space-between;
@@ -297,18 +336,30 @@ button{
 }
 
 /* ================= RESPONSIVE ================= */
-@media(max-width:600px){
-
-.banner-text h2{
-  font-size:20px;
+@media(max-width:768px){
+.price-info p{
+  font-size:14px;
+}
+body{
+  background-attachment:scroll;
+}
 }
 
+@media(max-width:600px){
+.banner-text h2{
+  font-size:22px;
+}
 .menu-grid{
   grid-template-columns:repeat(2,1fr);
 }
-
 .header-info{
   flex-direction:column;
 }
+}
 
+@media(max-width:480px){
+.price-info p{
+  font-size:13px;
+  border-bottom:1.5px solid #f1e2c6;
+}
 }
